@@ -1,12 +1,14 @@
-import React, { Component } from 'react';
-import Button from 'antd/lib/button';
+import React from 'react';
 import './App.css';
+import Header from './components/Header';
+import ProductIndex from './components/ProductIndex';
 
-class App extends Component {
+class App extends React.Component {
   render() {
     return (
-      <div className="App">
-        <Button type="primary">Button</Button>
+      <div>
+        <Header />
+        <ProductIndex />
       </div>
     );
   }
