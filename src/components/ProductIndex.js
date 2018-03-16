@@ -1,10 +1,11 @@
 import React from 'react';
 import ProductCard from './ProductCard';
+import Header from './Header';
 import { Product } from '../lib/requests';
 
 class ProductIndex extends React.Component {
   state = {
-    products: [],
+    products: []
   };
 
   componentDidMount() {
@@ -16,9 +17,10 @@ class ProductIndex extends React.Component {
 
     return(
       <div>
-        {products.map(product =>
+        <Header band={"Belle and Sebastian"}/>
+        { products.map(product =>
           <ProductCard product={product} />
-        )}
+        ) }
       </div>
     )
   }

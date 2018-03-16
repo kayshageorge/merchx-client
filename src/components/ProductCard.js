@@ -1,26 +1,25 @@
 import React from 'react';
-import { Card, Col, Row } from 'antd';
+import { Card, Col } from 'antd';
 const { Meta } = Card;
 
 class ProductCard extends React.Component {
   render() {
-    const { title, images, description, band_id } = this.props.product;
+    const { title, images, description, band_id, price } = this.props.product;
 
     return(
       <div>
-        <Row>
           <Col span={12}>
             <Card
                hoverable
-               cover={<img alt="example" src={images} />}
+               cover={<img style={{height: "30vh"}} alt="example" src={images} />}
+               style={{ margin: "10px" }}
              >
                <Meta
                  title={title}
-                 description="www.instagram.com"
+                 description={`$${price}`}
                />
             </Card>
           </Col>
-        </Row>
       </div>
     )
   }
