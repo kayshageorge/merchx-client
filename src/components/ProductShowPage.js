@@ -1,27 +1,24 @@
 import React from 'react';
-import Header from './Header';
+import { Product, Band } from '../lib/requests';
+import { connect } from 'react-redux';
+import uiActions from '../actions/uiActions';
 import ImageGallery from './ImageGallery';
 import ProductShowDetails from './ProductShowDetails';
-import { Product } from '../lib/requests';
 
 class ProductShowPage extends React.Component {
-  state = {
-    product: {},
-    loading: true
-  };
 
   componentDidMount() {
-    Product.one(2).then(data => this.setState({ product: data, loading: false }))
+    // console.log(this.props)
+    Product.one(this.props.match.params.id).then(data => {
+      this.props.updateCurrentProduct(data)
+    })
+
   }
 
   render() {
-    const { product, loading } = this.state;
-    if (loading) {
-      return <div>Loading....</div>
-    }
+    const product = this.props.currentProduct;
     return(
       <div>
-        <Header band={product.band.band_name} />
         <ImageGallery image={product.images}/>
         <ProductShowDetails product={product}/>
       </div>
@@ -29,4 +26,18 @@ class ProductShowPage extends React.Component {
   }
 }
 
-export default ProductShowPage;
+const mapStateToProps = (state) => {
+  return {
+    currentProduct: state.currentProduct,
+    currentBand: state.currentBand,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateCurrentProduct: (product) => dispatch(uiActions.updateCurrentProduct(product)),
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductShowPage);

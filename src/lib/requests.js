@@ -1,6 +1,6 @@
 const DOMAIN = 'localhost:3000';
 const BASE_URL = `http://${DOMAIN}`;
-const JWT = 'eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiYmFuZF9uYW1lIjoiQmVsbGUgYW5kIFNlYmFzdGlhbiIsImV4cCI6MTUyMTI2MTU4N30.tdA7xVdsoffkZaVjOnuzOJ-a3s7CHN3csfbhYQLEfT4';
+const JWT = 'eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiYmFuZF9uYW1lIjoiQmVsbGUgYW5kIFNlYmFzdGlhbiIsImV4cCI6MTUyMTczOTk0N30.cHnFc8yUOvSRARV-5Vl7l3nJx3ujWiTHtO6R11XspeI';
 
 const Product = {
   all (band_id) {
@@ -28,4 +28,18 @@ const Product = {
   }
 };
 
-export {Product};
+const Band = {
+  one (band_id) {
+    return fetch(
+      `${BASE_URL}/users/${band_id}`,
+      {
+        headers: {
+          'Authorization': JWT
+        }
+      }
+    )
+    .then(res => res.json());
+  }
+};
+
+export { Product, Band };

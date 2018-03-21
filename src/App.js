@@ -1,15 +1,18 @@
 import React from 'react';
 import './App.css';
-import ProductShowPage from './components/ProductShowPage';
-// import ProductIndex from './components/ProductIndex';
+import  { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import uiState from './reducers/uiState';
+import Router from './components/Router';
+const store = createStore(uiState);
+
 
 class App extends React.Component {
   render() {
     return (
-      <div>
-        <ProductShowPage />
-        {/* <ProductIndex /> */}
-      </div>
+      <Provider store={store}>
+        <Router />
+      </Provider>
     );
   }
 }
