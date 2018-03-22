@@ -6,11 +6,6 @@ import uiActions from '../actions/uiActions';
 import { Redirect } from 'react-router-dom';
 
 class Portal extends React.Component {
-  // componentDidMount() {
-  //   Band.one(this.props.match.params.id).then(data => {
-  //     this.props.updateCurrentBand(data)
-  //   })
-  // }
   constructor() {
     super();
     this.state = {bandName: ''};
@@ -36,13 +31,15 @@ class Portal extends React.Component {
     const band = this.props.currentBand;
 
     return(
-      <Form onSubmit={this.handleSubmit}>
+      <Form onSubmit={this.handleSubmit} >
         <Row type="flex" align="middle" style={{height: '100vh'}}>
-          <Col span="18" style={{margin: "auto"}}>
-            <Input value={this.state.bandName} onChange={this.handleChange} required placeholder="Enter access code..."/>
-          </Col>
-          <Col>
-            <Button type="primary" htmlType="submit">Enter</Button>
+          <Col span={18} offset={3} style={{margin: 'auto'}}>
+            <div>
+              <Input value={this.state.bandName} onChange={this.handleChange} required placeholder="Enter access code..."/>
+              <div style={{marginLeft: "40%", marginTop: "5px"}}>
+                <Button type="primary" htmlType="submit">Enter</Button>
+              </div>
+            </div>
           </Col>
         </Row>
       </Form>
