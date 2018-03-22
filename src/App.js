@@ -1,13 +1,18 @@
-import React, { Component } from 'react';
-import Button from 'antd/lib/button';
+import React from 'react';
 import './App.css';
+import  { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import uiState from './reducers/uiState';
+import Router from './components/Router';
+const store = createStore(uiState);
 
-class App extends Component {
+
+class App extends React.Component {
   render() {
     return (
-      <div className="App">
-        <Button type="primary">Button</Button>
-      </div>
+      <Provider store={store}>
+        <Router />
+      </Provider>
     );
   }
 }
