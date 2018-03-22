@@ -1,11 +1,65 @@
 import React from 'react';
+import { Input, Col, Row, Form, Button } from 'antd';
+import { Band } from '../lib/requests';
+import { connect } from 'react-redux';
+import uiActions from '../actions/uiActions';
+import { Redirect } from 'react-router-dom';
 
 class Portal extends React.Component {
+  // componentDidMount() {
+  //   Band.one(this.props.match.params.id).then(data => {
+  //     this.props.updateCurrentBand(data)
+  //   })
+  // }
+  constructor() {
+    super();
+    this.state = {bandName: ''};
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(e) {
+    console.log(e.target.value);
+    this.setState({bandName: e.target.value});
+  }
+
+  handleSubmit (e) {
+    e.preventDefault();
+    Band.search(this.state.bandName).then(data => {
+      this.props.updateCurrentBand(data[0].id)
+      return data[0].id
+    }).then((id) => this.props.history.push(`/band/${id}`))
+  }
+
   render(){
+    const band = this.props.currentBand;
+
     return(
-      <h1>Portal will be here...</h1>
+      <Form onSubmit={this.handleSubmit}>
+        <Row type="flex" align="middle" style={{height: '100vh'}}>
+          <Col span="18" style={{margin: "auto"}}>
+            <Input value={this.state.bandName} onChange={this.handleChange} required placeholder="Enter access code..."/>
+          </Col>
+          <Col>
+            <Button type="primary" htmlType="submit">Enter</Button>
+          </Col>
+        </Row>
+      </Form>
     )
   }
 }
 
-export default Portal;
+const mapStateToProps = (state) => {
+  return {
+    currentBand: state.currentBand
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateCurrentBand: (band) => dispatch(uiActions.updateCurrentBand(band)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Portal);

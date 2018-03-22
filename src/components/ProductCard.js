@@ -5,7 +5,7 @@ const { Meta } = Card;
 
 class ProductCard extends React.Component {
   render() {
-    const { id, title, images, description, band_id, price } = this.props.product;
+    const { id, title, images, price } = this.props.product;
 
     return(
       <div>

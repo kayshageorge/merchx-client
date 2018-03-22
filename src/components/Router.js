@@ -5,14 +5,20 @@ import Portal from './Portal';
 import ProductIndex from './ProductIndex';
 import ProductShowPage from './ProductShowPage';
 
+const HeaderRoute = (props) => {
+  return [
+    <Header key="1"/>,
+    <Route key="2" {...props} />
+  ]
+}
+
 const Router = () => (
   <BrowserRouter>
     <div>
-      <Header />
       <Switch>
         <Route exact path='/' component={ Portal } />
-        <Route exact path="/band/:id"  component={ ProductIndex }/>
-        <Route path="/products/:id" component={ ProductShowPage } />
+        <HeaderRoute exact path="/band/:id"  component={ ProductIndex }/>
+        <HeaderRoute path="/products/:id" component={ ProductShowPage } />
       </Switch>
     </div>
   </BrowserRouter>
