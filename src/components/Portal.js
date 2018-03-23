@@ -4,6 +4,7 @@ import { Band } from '../lib/requests';
 import { connect } from 'react-redux';
 import uiActions from '../actions/uiActions';
 import { Redirect } from 'react-router-dom';
+import localStore from '../lib/localStore';
 
 class Portal extends React.Component {
   constructor() {
@@ -21,9 +22,10 @@ class Portal extends React.Component {
 
   handleSubmit (e) {
     e.preventDefault();
-    Band.search(this.state.bandName).then(data => {
-      this.props.updateCurrentBand(data[0].id)
-      return data[0].id
+    Band.search(this.state.bandName).then(([ band ]) => {
+      this.props.updateCurrentBand(band)
+      localStore.set('currentBand', band )
+      return band.id
     }).then((id) => this.props.history.push(`/band/${id}`))
   }
 

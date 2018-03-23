@@ -1,14 +1,14 @@
+import localStore from '../lib/localStore';
+
 const initialState = {
   allProducts: [],
   currentProduct: {},
-  currentBand: '',
+  currentBand: localStore.get('currentBand'),
 }
 
 export default function formStore(state = initialState, action) {
   switch(action.type) {
     case 'UPDATE_ALL_PRODUCTS': {
-      // state.selectedBand
-      // const selectedProducts = action.payload.filter(product => product.band === state.selectedBand);
       return Object.assign({}, state, { allProducts: action.payload });
     }
     case 'UPDATE_CURRENT_PRODUCT': {

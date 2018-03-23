@@ -6,6 +6,7 @@ const actions = {
     return { type: 'UPDATE_CURRENT_PRODUCT', payload: product }
   },
   updateCurrentBand: (band) => {
+    console.log(band)
     return { type: 'UPDATE_CURRENT_BAND', payload: band }
   }
 }
