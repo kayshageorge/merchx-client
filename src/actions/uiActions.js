@@ -7,6 +7,9 @@ const actions = {
   },
   updateCurrentBand: (band) => {
     return { type: 'UPDATE_CURRENT_BAND', payload: band }
+  },
+  updateErrorState: (error) => {
+    return { type: 'UPDATE_ERROR_STATE', payload: error}
   }
 }
 

@@ -4,6 +4,7 @@ import { Band } from '../lib/requests';
 import { connect } from 'react-redux';
 import uiActions from '../actions/uiActions';
 import { Redirect } from 'react-router-dom';
+import localStore from '../lib/localStore';
 
 class Portal extends React.Component {
   constructor() {
@@ -21,10 +22,17 @@ class Portal extends React.Component {
 
   handleSubmit (e) {
     e.preventDefault();
-    Band.search(this.state.bandName).then(data => {
-      this.props.updateCurrentBand(data[0].id)
-      return data[0].id
-    }).then((id) => this.props.history.push(`/band/${id}`))
+    Band.search(this.state.bandName).then(([ band ]) => {
+      this.props.updateCurrentBand(band)
+      localStore.set('currentBand', band )
+      return band && band.id
+    }).then((id) => {
+      if (id) {
+        this.props.history.push(`/band/${id}`)
+      } else {
+        this.props.updateErrorState('no such band')
+      }
+    })
   }
 
   render(){
@@ -32,6 +40,9 @@ class Portal extends React.Component {
 
     return(
       <Form onSubmit={this.handleSubmit} >
+        {
+          this.props.errors && <span style={{color: 'red'}}>{this.props.errors}</span>
+        }
         <Row type="flex" align="middle" style={{height: '100vh'}}>
           <Col span={18} offset={3} style={{margin: 'auto'}}>
             <div>
@@ -49,13 +60,15 @@ class Portal extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    currentBand: state.currentBand
+    currentBand: state.currentBand,
+    errors: state.errors,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     updateCurrentBand: (band) => dispatch(uiActions.updateCurrentBand(band)),
+    updateErrorState: (error) => dispatch(uiActions.updateErrorState(error)),
   }
 }
 

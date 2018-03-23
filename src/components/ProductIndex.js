@@ -8,17 +8,13 @@ import uiActions from '../actions/uiActions';
 class ProductIndex extends React.Component {
 
   componentDidMount() {
-    Product.all(this.props.match.params.id).then(data => {
+    Product.all(this.props.currentBand.id).then(data => {
       this.props.updateAllProducts(data)
-    })
-    Band.one(this.props.match.params.id).then(data => {
-      this.props.updateCurrentBand(data)
     })
   }
 
   render() {
     const products = this.props.allProducts;
-    const band = this.props.currentBand;
 
     return(
       <div>
@@ -31,6 +27,7 @@ class ProductIndex extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+  console.log(state)
   return {
     allProducts: state.allProducts,
     currentBand: state.currentBand
