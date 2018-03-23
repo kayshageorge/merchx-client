@@ -1,9 +1,11 @@
 import localStore from '../lib/localStore';
 
+const getBand = () => localStore.get('currentBand') || {};
+
 const initialState = {
   allProducts: [],
   currentProduct: {},
-  currentBand: localStore.get('currentBand'),
+  currentBand: getBand()
 }
 
 export default function formStore(state = initialState, action) {
@@ -15,7 +17,10 @@ export default function formStore(state = initialState, action) {
       return Object.assign({}, state, { currentProduct: action.payload });
     }
     case 'UPDATE_CURRENT_BAND': {
-      return Object.assign({}, state, { currentBand: action.payload });
+      return Object.assign({}, state, { currentBand: action.payload, errors: undefined });
+    }
+    case 'UPDATE_ERROR_STATE': {
+      return Object.assign({}, state, { errors: action.payload });
     }
     default:
       return state;

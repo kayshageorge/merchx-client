@@ -25,8 +25,14 @@ class Portal extends React.Component {
     Band.search(this.state.bandName).then(([ band ]) => {
       this.props.updateCurrentBand(band)
       localStore.set('currentBand', band )
-      return band.id
-    }).then((id) => this.props.history.push(`/band/${id}`))
+      return band && band.id
+    }).then((id) => {
+      if (id) {
+        this.props.history.push(`/band/${id}`)
+      } else {
+        this.props.updateErrorState('no such band')
+      }
+    })
   }
 
   render(){
@@ -34,6 +40,9 @@ class Portal extends React.Component {
 
     return(
       <Form onSubmit={this.handleSubmit} >
+        {
+          this.props.errors && <span style={{color: 'red'}}>{this.props.errors}</span>
+        }
         <Row type="flex" align="middle" style={{height: '100vh'}}>
           <Col span={18} offset={3} style={{margin: 'auto'}}>
             <div>
@@ -51,13 +60,15 @@ class Portal extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    currentBand: state.currentBand
+    currentBand: state.currentBand,
+    errors: state.errors,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     updateCurrentBand: (band) => dispatch(uiActions.updateCurrentBand(band)),
+    updateErrorState: (error) => dispatch(uiActions.updateErrorState(error)),
   }
 }
 
