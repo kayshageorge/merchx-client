@@ -5,7 +5,8 @@ const getBand = () => localStore.get('currentBand') || {};
 const initialState = {
   allProducts: [],
   currentProduct: {},
-  currentBand: getBand()
+  currentBand: getBand(),
+  productSkus: [],
 }
 
 export default function formStore(state = initialState, action) {
@@ -21,6 +22,9 @@ export default function formStore(state = initialState, action) {
     }
     case 'UPDATE_ERROR_STATE': {
       return Object.assign({}, state, { errors: action.payload });
+    }
+    case 'UPDATE_PRODUCT_SKUS': {
+      return Object.assign({}, state, { productSkus: action.payload });
     }
     default:
       return state;
