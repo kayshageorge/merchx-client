@@ -1,6 +1,6 @@
 const DOMAIN = 'localhost:3000';
 const BASE_URL = `http://${DOMAIN}`;
-const JWT = 'eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiYmFuZF9uYW1lIjoiQmVsbGUgYW5kIFNlYmFzdGlhbiIsImV4cCI6MTUyMTg2MjM2OH0.OufF3dfO3cHCOvr-uAYc_AHR4A74uhvbEcgj1chP1hA';
+const JWT = 'eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiYmFuZF9uYW1lIjoiQmVsbGUgYW5kIFNlYmFzdGlhbiIsImV4cCI6MTUyMTk0OTEyMH0.tERBkGYHJOsbM9jAETxVFSQqxvEst0td4v0np6m6O7c';
 
 const Product = {
   all (band_id) {
@@ -64,6 +64,20 @@ const Sku = {
         headers: {
           'Authorization': JWT,
         },
+      }
+    )
+    .then(res => res.json());
+  },
+  search (product_id, size) {
+    return fetch(
+      `${BASE_URL}/skus/search`,
+      {
+        method: 'post',
+        headers: {
+          'Authorization': JWT,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ product: product_id, selected_size: size })
       }
     )
     .then(res => res.json());

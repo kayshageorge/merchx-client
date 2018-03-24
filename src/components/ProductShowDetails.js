@@ -3,6 +3,7 @@ import { Radio, Button, Row, Col, Form } from 'antd';
 import { Sku } from '../lib/requests';
 import { connect } from 'react-redux';
 import uiActions from '../actions/uiActions';
+import localStore from '../lib/localStore';
 
 const ButtonGroup = Button.Group;
 const FormItem = Form.Item;
@@ -23,11 +24,16 @@ class ProductShowDetails extends React.Component {
 
   handleSubmit (e) {
     e.preventDefault();
-    console.log(this.state.pendingLineItemSize)
-    // update cart --> concat existiing with new
-      // this.props.updateCart(pendingLineItems)
-      // set localstorage --> concat existing with new
-      // localStore.set('cart', pendingLineItems)
+    console.log(this.state.pendingLineItemSize, this.props.product.id)
+
+    Sku.search(this.props.product.id, this.state.pendingLineItemSize).then(data => {
+      console.log(data[0].id);
+      this.props.updateCart({sku_id: data[0].id, total: this.props.product.price, count: 1})
+      localStore.set('cart', data[0].id)
+      return data && data[0].id
+    }).then((id) => {
+      console.log(this.props.cart)
+    })
   }
 
 
