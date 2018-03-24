@@ -54,12 +54,12 @@ class ProductShowDetails extends React.Component {
         </Row>
         <Form onSubmit={this.handleSubmit} >
           <FormItem>
-            <Radio.Group onChange={this.handleChange} style={{display: 'flex', justifyContent: "center", flexDirection: "column"}}>
-              <ButtonGroup style={{flexDirection: "row", alignSelf: "center"}}>
+            <Radio.Group onChange={this.handleChange}>
+              <ButtonGroup style={{marginLeft: "11%", marginRight: "10%"}}>
                 <Button style={{width: "24%"}} disabled>Unisex</Button>
                 {!!this.props.productSkus && this.renderSizes(this.props.productSkus, "unisex_label")}
               </ButtonGroup>
-              <ButtonGroup style={{flexDirection: "row", alignSelf: "center"}}>
+              <ButtonGroup style={{marginLeft: "11%"}}>
                 <Button style={{width: "24%"}} disabled>Ladies</Button>
                 {!!this.props.productSkus && this.renderSizes(this.props.productSkus, "ladies_label")}
               </ButtonGroup>
