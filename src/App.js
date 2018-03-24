@@ -4,6 +4,7 @@ import  { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import uiState from './reducers/uiState';
 import Router from './components/Router';
+
 const store = createStore(uiState);
 
 

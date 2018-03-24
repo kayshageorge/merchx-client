@@ -10,6 +10,9 @@ const actions = {
   },
   updateErrorState: (error) => {
     return { type: 'UPDATE_ERROR_STATE', payload: error}
+  },
+  updateProductSkus: (skus) => {
+    return { type: 'UPDATE_PRODUCT_SKUS', payload: skus }
   }
 }
 

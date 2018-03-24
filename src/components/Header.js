@@ -4,9 +4,7 @@ import { connect } from 'react-redux';
 
 class Header extends React.Component {
   render() {
-    console.log(this.props);
     const bandName = this.props.currentBand.band_name
-    console.log(this.props.currentBand)
     return (
       <Row type="flex" justify="space-between" align="center" style={{marginTop: "13px"}}>
         <Col span={18}>
