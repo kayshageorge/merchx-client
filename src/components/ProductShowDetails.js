@@ -1,26 +1,40 @@
 import React from 'react';
-import { Button, Row, Col } from 'antd';
+import { Radio, Button, Row, Col, Form } from 'antd';
 import { Sku } from '../lib/requests';
-// import { connect } from 'react-redux';
-// import uiActions from '../actions/uiActions';
+import { connect } from 'react-redux';
+import uiActions from '../actions/uiActions';
 
 const ButtonGroup = Button.Group;
+const FormItem = Form.Item;
 
 class ProductShowDetails extends React.Component {
 
-  // componentDidUpdate(previousProps) {
-  //   // console.log(this.props.product.id);
-  //   // console.log(previousProps);
-  //   Sku.all(this.props.product.id).then(data => {
-  //     this.props.updateProductSkus(data)
-  //     console.log(data);
-  //   })
-  // }
+  constructor() {
+    super();
+    this.state = {pendingLineItemSize: ''};
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(e) {
+    this.setState({pendingLineItemSize: e.target.value});
+  }
+
+  handleSubmit (e) {
+    e.preventDefault();
+    console.log(this.state.pendingLineItemSize)
+    // update cart --> concat existiing with new
+      // this.props.updateCart(pendingLineItems)
+      // set localstorage --> concat existing with new
+      // localStore.set('cart', pendingLineItems)
+  }
+
 
   renderSizes = (productSkus, labelType) => {
     const sizeButtons = productSkus.map(sku => {
       if (sku[labelType]) {
-        return <Button disabled={sku.qty <= 0}>{sku[labelType]}</Button>
+        return <Radio.Button value={sku.size} disabled={sku.qty <= 0}>{sku[labelType]}</Radio.Button>
       }
     })
     return sizeButtons;
@@ -32,21 +46,25 @@ class ProductShowDetails extends React.Component {
         <Row type="flex" justify="center">
           <h3>{`$${this.props.product.price}`}</h3>
         </Row>
-        <Row type="flex" justify="center">
-          <ButtonGroup>
-            <Button disabled>Unisex</Button>
-            {!!this.props.productSkus && this.renderSizes(this.props.productSkus, "unisex_label")}
-          </ButtonGroup>
-        </Row>
-        <Row type="flex" justify="center">
-          <ButtonGroup>
-            <Button disabled>Ladies</Button>
-            {!!this.props.productSkus && this.renderSizes(this.props.productSkus, "ladies_label")}
-          </ButtonGroup>
-        </Row>
-        <Row type="flex" justify="center" align="bottom">
-          <Button style={{marginTop: "10px", marginBottom: "15px"}} size="large">Add to Cart</Button>
-        </Row>
+        <Form onSubmit={this.handleSubmit} >
+          <FormItem>
+            <Radio.Group onChange={this.handleChange}>
+              <ButtonGroup style={{marginLeft: "11%", marginRight: "10%"}}>
+                <Button style={{width: "24%"}} disabled>Unisex</Button>
+                {!!this.props.productSkus && this.renderSizes(this.props.productSkus, "unisex_label")}
+              </ButtonGroup>
+              <ButtonGroup style={{marginLeft: "11%"}}>
+                <Button style={{width: "24%"}} disabled>Ladies</Button>
+                {!!this.props.productSkus && this.renderSizes(this.props.productSkus, "ladies_label")}
+              </ButtonGroup>
+            </Radio.Group>
+          </FormItem>
+          <FormItem>
+            <Row type="flex" justify="center">
+              <Button style={{marginTop: "10px", marginBottom: "15px"}} size="large" htmlType="submit">Add to Cart</Button>
+            </Row>
+          </FormItem>
+        </Form>
         <Row type="flex" justify="center" >
           <Col span={18}>
             <p style={{textAlign: "center"}}>{this.props.product.description}</p>
@@ -57,20 +75,16 @@ class ProductShowDetails extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    cart: state.cart,
+  }
+}
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateCart: (pendingLineItems) => dispatch(uiActions.updateCart(pendingLineItems)),
+  }
+}
 
-// const mapStateToProps = (state) => {
-//   // console.log(state)
-//   return {
-//     productSkus: state.productSkus
-//   }
-// }
-//
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     updateProductSkus: (skus) => dispatch(uiActions.updateProductSkus(skus)),
-//   }
-// }
-
-
-export default ProductShowDetails;
+export default connect(mapStateToProps, mapDispatchToProps)(ProductShowDetails);
