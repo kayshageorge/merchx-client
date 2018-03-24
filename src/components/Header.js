@@ -11,7 +11,7 @@ class Header extends React.Component {
           <h1>{bandName}</h1>
         </Col>
         <Col span={3}>
-          <Badge count={2}>
+          <Badge count={this.props.cart.length}>
             <Icon type="shopping-cart" style={{ fontSize: 35}} />
           </Badge>
         </Col>
@@ -22,7 +22,8 @@ class Header extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    currentBand: state.currentBand
+    currentBand: state.currentBand,
+    cart: state.cart
   }
 }
 

@@ -13,6 +13,9 @@ const actions = {
   },
   updateProductSkus: (skus) => {
     return { type: 'UPDATE_PRODUCT_SKUS', payload: skus }
+  },
+  updateCart: (pendingLineItems) => {
+    return { type: 'UPDATE_CART', payload: pendingLineItems }
   }
 }
 
