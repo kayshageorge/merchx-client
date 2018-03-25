@@ -1,14 +1,19 @@
 import React from 'react';
+import CartHeader from './CartHeader';
 import CartItem from './CartItem';
 import { connect } from 'react-redux';
 import uiActions from '../actions/uiActions';
 
-class ShoppingCartPage extends React.Component {
+class CartPage extends React.Component {
   render() {
-    const pendingLineItems = this.props.pendingLineItems
+    const cart = this.props.cart
+    console.log(cart);
     return(
       <div>
-        <CartItem />
+        <CartHeader />
+          { cart.map((item, key) =>
+            <CartItem item={item} key={key} />
+          ) }
       </div>
     )
   }
@@ -27,4 +32,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCartPage);
+export default connect(mapStateToProps, mapDispatchToProps)(CartPage);

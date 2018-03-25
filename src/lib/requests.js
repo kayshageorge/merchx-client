@@ -68,6 +68,17 @@ const Sku = {
     )
     .then(res => res.json());
   },
+  one (id) {
+    return fetch(
+      `${BASE_URL}/skus/${id}`,
+      {
+        headers: {
+          'Authorization': JWT,
+        },
+      }
+    )
+    .then(res => res.json());
+  },
   search (product_id, size) {
     return fetch(
       `${BASE_URL}/skus/search`,
