@@ -1,6 +1,6 @@
 const DOMAIN = 'localhost:3000';
 const BASE_URL = `http://${DOMAIN}`;
-const JWT = 'eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiYmFuZF9uYW1lIjoiQmVsbGUgYW5kIFNlYmFzdGlhbiIsImV4cCI6MTUyMTk0OTEyMH0.tERBkGYHJOsbM9jAETxVFSQqxvEst0td4v0np6m6O7c';
+const JWT = 'eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiYmFuZF9uYW1lIjoiQmVsbGUgYW5kIFNlYmFzdGlhbiIsImV4cCI6MTUyMjA5MTg5NH0._7qdw8ClZIOsTqI-q6AHHAkDeoUjRAxurb6dn_V_9Pk';
 
 const Product = {
   all (band_id) {
