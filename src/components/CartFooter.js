@@ -5,8 +5,8 @@ class CartFooter extends React.Component {
   render() {
     return(
       <div>
-        <Row style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-          <Col offset={1} span={17}>
+        <Row style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center'}}>
+          <Col span={15}>
             <p>Total: $$$$$</p>
           </Col>
           <Col span={6}>
