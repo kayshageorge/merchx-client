@@ -4,8 +4,8 @@ import Header from './Header';
 import Portal from './Portal';
 import ProductIndex from './ProductIndex';
 import ProductShowPage from './ProductShowPage';
-// import WrappedSignInForm from './BandSignInPage';
 import WrappedSignIn from './BandSignIn';
+import CartPage from './CartPage';
 
 const HeaderRoute = (props) => {
   return [
@@ -20,9 +20,9 @@ const Router = () => (
       <Switch>
         <Route exact path='/' component={ Portal } />
         <Route exact path='/band/sign_in' component={ WrappedSignIn } />
-        {/* <Route exact path='/band/sign_up' component={ BandSignUpPage } /> */}
         <HeaderRoute path="/band/:id"  component={ ProductIndex }/>
         <HeaderRoute path="/products/:id" component={ ProductShowPage } />
+        <Route exact path="/cart" component={ CartPage } />
       </Switch>
     </div>
   </BrowserRouter>
