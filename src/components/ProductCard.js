@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Col } from 'antd';
 import { Link } from 'react-router-dom';
+
 const { Meta } = Card;
 
 class ProductCard extends React.Component {
