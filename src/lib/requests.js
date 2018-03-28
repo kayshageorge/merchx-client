@@ -2,6 +2,21 @@ const DOMAIN = 'localhost:3000';
 const BASE_URL = `http://${DOMAIN}`;
 const JWT = 'eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiYmFuZF9uYW1lIjoiQmVsbGUgYW5kIFNlYmFzdGlhbiIsImV4cCI6MTUyMjM0OTU3Mn0.8bWV0a1wOea2Kw1NMANA6VZafKCTWDjejIOQ3frc1uc';
 
+const Token = {
+  create (params) {
+    return fetch(
+      `${BASE_URL}/tokens`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(params)
+      }
+    ).then(res => res.json())
+  }
+}
+
 const Product = {
   all (band_id) {
     return fetch(
@@ -95,4 +110,4 @@ const Sku = {
   }
 };
 
-export { Product, Band, Sku };
+export { Product, Band, Sku, Token };
