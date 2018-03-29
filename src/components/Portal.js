@@ -3,7 +3,7 @@ import { Input, Col, Row, Form, Button } from 'antd';
 import { Band } from '../lib/requests';
 import { connect } from 'react-redux';
 import uiActions from '../actions/uiActions';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import localStore from '../lib/localStore';
 
 class Portal extends React.Component {
@@ -16,7 +16,6 @@ class Portal extends React.Component {
   }
 
   handleChange(e) {
-    console.log(e.target.value);
     this.setState({bandName: e.target.value});
   }
 
@@ -43,7 +42,7 @@ class Portal extends React.Component {
         {
           this.props.errors && <span style={{color: 'red'}}>{this.props.errors}</span>
         }
-        <Row type="flex" align="middle" style={{height: '100vh'}}>
+        <Row type="flex" align="middle" style={{height: '97vh'}}>
           <Col span={18} offset={3} style={{margin: 'auto'}}>
             <div>
               <Input value={this.state.bandName} onChange={this.handleChange} required placeholder="Enter access code..."/>
@@ -51,6 +50,11 @@ class Portal extends React.Component {
                 <Button type="primary" htmlType="submit">Enter</Button>
               </div>
             </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col offset={19} span={5}>
+            <Link to='/band/sign_in'>In a band?</Link>
           </Col>
         </Row>
       </Form>

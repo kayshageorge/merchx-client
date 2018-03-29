@@ -27,7 +27,6 @@ class ProductIndex extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  // console.log(state)
   return {
     allProducts: state.allProducts,
     currentBand: state.currentBand

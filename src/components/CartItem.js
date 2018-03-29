@@ -1,6 +1,9 @@
 import React from 'react';
 import { Card, Row, Col, Button } from 'antd';
 import { Product, Sku } from '../lib/requests';
+import { connect } from 'react-redux';
+import uiActions from '../actions/uiActions';
+import localStore from '../lib/localStore';
 
 class CartItem extends React.Component {
   constructor() {
@@ -9,19 +12,31 @@ class CartItem extends React.Component {
       sku: {},
       product: {}
     };
+    this.remove = this.remove.bind(this);
   }
 
-  componentDidMount() {
+  componentWillMount() {
     Sku.one(this.props.item.sku_id).then(data => {
       this.setState({sku: data, product: data.product});
       return data;
     })
   }
 
+  remove(){
+    let cart = [...this.props.cart]
+    cart.splice(this.props.index, 1);
+    console.log(cart);
+    localStore.set('cart', cart)
+    this.props.updateCart(cart)
+  }
+
   render() {
     const sku = this.state.sku
-    console.log(this.state.product)
     const {id, title, description, images, price } = this.state.product
+    const cart = this.props.cart
+    const index = this.props.index
+    console.log('cart', cart)
+    console.log('index', index);
 
     return(
       <div>
@@ -44,7 +59,7 @@ class CartItem extends React.Component {
               </Col>
               <Col offset={4} span={5} style={{display: 'flex', alignItems: 'center', justifyContent: 'end'}}>
                 <div>
-                  <Button style={{marginBottom: '13px'}}>X</Button>
+                  <Button onClick={this.remove} style={{marginBottom: '13px'}}>X</Button>
                   <p style={{display: 'flex', justifyContent: 'center'}}>${price}</p>
                 </div>
               </Col>
@@ -55,4 +70,17 @@ class CartItem extends React.Component {
   }
 }
 
-export default CartItem;
+const mapStateToProps = (state) => {
+  return {
+    cart: state.cart
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateCart: (lineItems) => dispatch(uiActions.updateCart(lineItems))
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(CartItem);

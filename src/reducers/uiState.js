@@ -40,6 +40,7 @@ export default function formStore(state = initialState, action) {
         productSkus: action.payload
       }
     case 'UPDATE_CART':
+    console.log('reducer', action.payload)
       return {
         ...state,
         cart: action.payload
