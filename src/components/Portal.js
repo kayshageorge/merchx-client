@@ -54,7 +54,7 @@ class Portal extends React.Component {
           </Col>
         </Row>
         <Row>
-          <Col offset={20} span={4}>
+          <Col offset={19} span={5}>
             <Link to='/band/sign_in'>In a band?</Link>
           </Col>
         </Row>

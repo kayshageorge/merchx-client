@@ -1,6 +1,6 @@
 import React from 'react';
 import localStore from '../lib/localStore';
-import { Band } from '../lib/requests';
+import { Band, Token } from '../lib/requests';
 import { Row, Col, Form, Input, Button, Icon } from 'antd';
 import { Redirect, Link } from 'react-router-dom';
 
@@ -20,10 +20,12 @@ class BandSignUp extends React.Component {
 
     const { onSignIn= () => {} } = this.props;
     const formData = new FormData(e.currentTarget);
+    let password = ''
 
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
+        password = values.password
         Band.create({
           user: {
             band_name: values.band_name,
@@ -32,18 +34,25 @@ class BandSignUp extends React.Component {
             password_confirmation: values.password_confirmation
           }
         }).then(data => {
-          if (!data.errors) {
-            localStore.set('jwt', data.jwt);
-            onSignIn();
-            console.log(data.jwt)
-            this.props.history.push('/');
-          } else {
-            this.setState({
-              errors: [{
-                message: "Invalid Username or Password!"
-              }]
-            })
-          }
+          console.log(data)
+          console.log(password)
+          Token.create({
+            email: data.email,
+            password: password
+          }).then(data => {
+            if (!data.errors) {
+              localStore.set('jwt', data.jwt);
+              onSignIn();
+              console.log(data.jwt)
+              this.props.history.push('/');
+            } else {
+              this.setState({
+                errors: [{
+                  message: "Invalid Username or Password!"
+                }]
+              })
+            }
+          })
         })
       }
     });
