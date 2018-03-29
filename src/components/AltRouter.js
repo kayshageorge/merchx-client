@@ -1,10 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
-import { connect } from 'react-redux';
-import uiActions from '../actions/uiActions';
-import localStore from '../lib/localStore';
-import NotFoundPage from './NotFoundPage';
 import AuthRoute from './AuthRoute';
 import Header from './Header';
 import Portal from './Portal';
@@ -39,13 +35,10 @@ class Router extends React.Component {
   }
 
   signIn () {
-    const jwt =  localStore.get('jwt');
+    const jwt =  localStore.getItem('jwt');
 
     if (jwt) {
       const payload = jwtDecode(jwt);
-      this.props.updateUser(payload);
-      console.log(payload);
-      console.log('user in state', this.props.user)
       this.setState({
         user: payload
       });
@@ -54,7 +47,6 @@ class Router extends React.Component {
 
   signOut () {
     localStore.removeItem('jwt');
-    localStore.removeItem('user');
     this.setState({user: null});
   }
 
@@ -84,7 +76,6 @@ class Router extends React.Component {
             <HeaderRoute path="/band/:id"  component={ ProductIndex }/>
             <HeaderRoute path="/products/:id" component={ ProductShowPage } />
             <Route exact path="/cart" component={ CartPage } />
-            <Route exact path='/' component={ Portal } />
             <Route component={NotFoundPage} />
           </Switch>
         </div>
@@ -93,17 +84,47 @@ class Router extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user
-  }
+
+export default Router;
+
+
+
+
+// ////////////////////////////////////////////////////////////////////////////
+
+
+import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import jwtDecode from 'jwt-decode';
+import AuthRoute from './AuthRoute';
+import Header from './Header';
+import Portal from './Portal';
+import ProductIndex from './ProductIndex';
+import ProductShowPage from './ProductShowPage';
+import WrappedSignIn from './BandSignIn';
+import WrappedSignUp from './BandSignUp';
+import CartPage from './CartPage';
+
+const HeaderRoute = (props) => {
+  return [
+    <Header key="1"/>,
+    <Route key="2" {...props} />
+  ]
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    updateUser: (user) => dispatch(uiActions.updateUser(user))
-  }
-}
+const Router = () => (
+  <BrowserRouter>
+    <div>
+      <Switch>
+        <Route exact path='/' component={ Portal } />
+        <Route exact path='/band/sign_in' component={ WrappedSignIn } />
+        <Route exact path='/band/sign_up' component={ WrappedSignUp } />
+        <HeaderRoute path="/band/:id"  component={ ProductIndex }/>
+        <HeaderRoute path="/products/:id" component={ ProductShowPage } />
+        <Route exact path="/cart" component={ CartPage } />
+      </Switch>
+    </div>
+  </BrowserRouter>
+)
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(Router);
+export default Router;

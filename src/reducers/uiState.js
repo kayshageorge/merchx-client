@@ -1,9 +1,11 @@
 import localStore from '../lib/localStore';
 
+const getUser = () => localStore.get('user') || {};
 const getBand = () => localStore.get('currentBand') || {};
 const getCart = () => localStore.get('cart') || [];
 
 const initialState = {
+  user: getUser(),
   allProducts: [],
   currentProduct: {},
   currentBand: getBand(),
@@ -13,6 +15,11 @@ const initialState = {
 
 export default function formStore(state = initialState, action) {
   switch(action.type) {
+    case 'UPDATE_USER':
+      return {
+        ...state,
+        user: action.payload
+      }
     case 'UPDATE_ALL_PRODUCTS':
       return {
         ...state,

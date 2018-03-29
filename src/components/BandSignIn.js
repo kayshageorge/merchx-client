@@ -2,7 +2,7 @@ import React from 'react';
 import localStore from '../lib/localStore';
 import { Token } from '../lib/requests';
 import { Row, Col, Form, Input, Button, Icon } from 'antd';
-import { Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const FormItem = Form.Item;
 
@@ -32,7 +32,7 @@ class BandSignIn extends React.Component {
             localStore.set('jwt', data.jwt);
             onSignIn();
             console.log(data.jwt)
-            this.props.history.push('/');
+            this.props.history.push('/band/profile');
           } else {
             this.setState({
               errors: [{
@@ -46,7 +46,7 @@ class BandSignIn extends React.Component {
   }
 
   render() {
-    const { errors } = this.state
+    // const { errors } = this.state
     const { getFieldDecorator } = this.props.form;
     return(
       <Row type="flex" align="middle" style={{height: '100vh'}}>

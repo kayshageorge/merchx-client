@@ -1,4 +1,7 @@
 const actions = {
+  updateUser: (user) => {
+    return { type: 'UPDATE_USER', payload: user }
+  },
   updateAllProducts: (products) => {
     return { type: 'UPDATE_ALL_PRODUCTS', payload: products }
   },

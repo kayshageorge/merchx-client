@@ -2,7 +2,7 @@ import React from 'react';
 import localStore from '../lib/localStore';
 import { Band, Token } from '../lib/requests';
 import { Row, Col, Form, Input, Button, Icon } from 'antd';
-import { Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const FormItem = Form.Item;
 
@@ -42,7 +42,7 @@ class BandSignUp extends React.Component {
               localStore.set('jwt', data.jwt);
               onSignIn();
               console.log(data.jwt)
-              this.props.history.push('/');
+              this.props.history.push('/band/profile');
             } else {
               this.setState({
                 errors: [{
