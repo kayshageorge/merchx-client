@@ -16,7 +16,6 @@ class Portal extends React.Component {
   }
 
   handleChange(e) {
-    console.log(e.target.value);
     this.setState({bandName: e.target.value});
   }
 

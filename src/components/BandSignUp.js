@@ -34,8 +34,6 @@ class BandSignUp extends React.Component {
             password_confirmation: values.password_confirmation
           }
         }).then(data => {
-          console.log(data)
-          console.log(password)
           Token.create({
             email: data.email,
             password: password

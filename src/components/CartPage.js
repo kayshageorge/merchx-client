@@ -6,32 +6,41 @@ import { connect } from 'react-redux';
 import uiActions from '../actions/uiActions';
 
 class CartPage extends React.Component {
+
+  componentWillUpdate(nextProps, nextState) {
+      console.log('should update')
+  }
+
+  componentDidMount() {
+    console.log('hey brook', this.props.cart);
+  }
+
   render() {
-    const cart = this.props.cart;
+    let cart = this.props.cart;
+    let total = 0
     console.log(cart);
     return(
       <div>
         <CartHeader />
-          { cart.map((item, key) =>
-            <CartItem item={item} key={key} />
+          { cart.map((item, key) => {
+            console.log(item.total)
+            total += parseInt(item.total, 10)
+            console.log('total', total)
+            return <CartItem item={item} key={key} index={key} />
+          }
           ) }
-        <CartFooter />
+        <CartFooter total={total} />
       </div>
     )
   }
 }
 
 const mapStateToProps = (state) => {
+  console.log(state)
   return {
     cart: state.cart
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    updateAllCart: (lineItems) => dispatch(uiActions.updateAllCart(lineItems))
-  }
-}
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(CartPage);
+export default connect(mapStateToProps)(CartPage);

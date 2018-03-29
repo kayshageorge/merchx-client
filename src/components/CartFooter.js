@@ -7,7 +7,7 @@ class CartFooter extends React.Component {
       <div>
         <Row style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center'}}>
           <Col span={15}>
-            <p>Total: $$$$$</p>
+            <p>Total: ${this.props.total}</p>
           </Col>
           <Col span={6}>
             <Button style={{marginTop: "10px", marginBottom: "15px"}} size="large">Checkout</Button>
