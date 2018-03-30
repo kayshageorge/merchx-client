@@ -16,7 +16,6 @@ class CartItem extends React.Component {
   }
 
   componentWillMount() {
-    console.log('PROPS RECIEVED CWM', this.props.item.sku_id);
     Sku.one(this.props.item.sku_id).then(data => {
       this.setState({sku: data, product: data.product});
       return data;
@@ -24,7 +23,6 @@ class CartItem extends React.Component {
   }
 
   componentWillReceiveProps() {
-    console.log('PROPS RECIEVED CWRP', this.props.test);
     
     Sku.one(this.props.item.sku_id).then(data => {
       this.setState({sku: data, product: data.product});

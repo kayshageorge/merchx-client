@@ -28,7 +28,7 @@ class CartPage extends React.Component {
             console.log('total', total)
             console.log('PROPS BEING SENT: SKU ID', item.sku_id);
             
-            return <CartItem item={item} test={item.sku_id} key={item.sku_id} index={key} />
+            return <CartItem item={item} key={item.sku_id} index={key} />
           }
           ) }
         <CartFooter total={total} />
