@@ -22,10 +22,17 @@ class CartItem extends React.Component {
     })
   }
 
+  componentWillReceiveProps() {
+    Sku.one(this.props.item.sku_id).then(data => {
+      this.setState({sku: data, product: data.product});
+      return data;
+    })
+  }
+
   remove(){
     let cart = [...this.props.cart]
     cart.splice(this.props.index, 1);
-    console.log(cart);
+    console.log('cart after removed', cart)
     localStore.set('cart', cart)
     this.props.updateCart(cart)
   }

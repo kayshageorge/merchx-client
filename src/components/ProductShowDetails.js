@@ -28,8 +28,9 @@ class ProductShowDetails extends React.Component {
 
     Sku.search(this.props.product.id, this.state.pendingLineItemSize).then(data => {
       console.log(data[0].id);
-      this.props.updateCart( [...this.props.cart, {sku_id: data[0].id, total: this.props.product.price, count: 1}])
-      localStore.set('cart', [...this.props.cart, {sku_id: data[0].id, total: this.props.product.price, count: 1}])
+      let uniqueId = new Date()
+      this.props.updateCart( [...this.props.cart, {item_id: uniqueId, sku_id: data[0].id, total: this.props.product.price, count: 1}])
+      localStore.set('cart', [...this.props.cart, {item_id: uniqueId, sku_id: data[0].id, total: this.props.product.price, count: 1}])
       return data && data[0].id
     }).then((id) => {
       console.log(this.props.cart)

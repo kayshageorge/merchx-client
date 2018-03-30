@@ -11,8 +11,8 @@ class CartPage extends React.Component {
       console.log('should update')
   }
 
-  componentDidMount() {
-    console.log('hey brook', this.props.cart);
+  componentWillUpdate() {
+    console.log('CART PAGE UPDATED', this.props.cart);
   }
 
   render() {
@@ -25,8 +25,8 @@ class CartPage extends React.Component {
           { cart.map((item, key) => {
             console.log(item.total)
             total += parseInt(item.total, 10)
-            console.log('total', total)
-            return <CartItem item={item} key={key} index={key} />
+            // NOTE there may be behavior changes if it turns our that the key is not unique.
+            return <CartItem item={item} key={item.item_id} index={key} />
           }
           ) }
         <CartFooter total={total} />
