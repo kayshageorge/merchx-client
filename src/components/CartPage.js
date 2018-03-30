@@ -11,8 +11,8 @@ class CartPage extends React.Component {
       console.log('should update')
   }
 
-  componentDidMount() {
-    console.log('hey brook', this.props.cart);
+  componentWillUpdate() {
+    console.log('CART PAGE UPDATED', this.props.cart);
   }
 
   render() {
@@ -26,7 +26,9 @@ class CartPage extends React.Component {
             console.log(item.total)
             total += parseInt(item.total, 10)
             console.log('total', total)
-            return <CartItem item={item} key={key} index={key} />
+            console.log('PROPS BEING SENT: SKU ID', item.sku_id);
+            
+            return <CartItem item={item} test={item.sku_id} key={item.sku_id} index={key} />
           }
           ) }
         <CartFooter total={total} />

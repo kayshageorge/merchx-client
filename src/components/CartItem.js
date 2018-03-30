@@ -16,6 +16,16 @@ class CartItem extends React.Component {
   }
 
   componentWillMount() {
+    console.log('PROPS RECIEVED CWM', this.props.item.sku_id);
+    Sku.one(this.props.item.sku_id).then(data => {
+      this.setState({sku: data, product: data.product});
+      return data;
+    })
+  }
+
+  componentWillReceiveProps() {
+    console.log('PROPS RECIEVED CWRP', this.props.test);
+    
     Sku.one(this.props.item.sku_id).then(data => {
       this.setState({sku: data, product: data.product});
       return data;
@@ -25,7 +35,7 @@ class CartItem extends React.Component {
   remove(){
     let cart = [...this.props.cart]
     cart.splice(this.props.index, 1);
-    console.log(cart);
+    console.log('cart after removed', cart)
     localStore.set('cart', cart)
     this.props.updateCart(cart)
   }
