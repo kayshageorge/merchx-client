@@ -23,7 +23,6 @@ class CartItem extends React.Component {
   }
 
   componentWillReceiveProps() {
-    
     Sku.one(this.props.item.sku_id).then(data => {
       this.setState({sku: data, product: data.product});
       return data;

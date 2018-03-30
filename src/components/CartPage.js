@@ -25,10 +25,8 @@ class CartPage extends React.Component {
           { cart.map((item, key) => {
             console.log(item.total)
             total += parseInt(item.total, 10)
-            console.log('total', total)
-            console.log('PROPS BEING SENT: SKU ID', item.sku_id);
-            
-            return <CartItem item={item} key={item.sku_id} index={key} />
+            // NOTE there may be behavior changes if it turns our that the key is not unique.
+            return <CartItem item={item} key={`${item.sku_id}${key}`} index={key} />
           }
           ) }
         <CartFooter total={total} />
