@@ -7,14 +7,6 @@ import uiActions from '../actions/uiActions';
 
 class CartPage extends React.Component {
 
-  componentWillUpdate(nextProps, nextState) {
-      console.log('should update')
-  }
-
-  componentWillUpdate() {
-    console.log('CART PAGE UPDATED', this.props.cart);
-  }
-
   render() {
     let cart = this.props.cart;
     let total = 0

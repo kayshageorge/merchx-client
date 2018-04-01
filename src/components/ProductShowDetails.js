@@ -29,8 +29,8 @@ class ProductShowDetails extends React.Component {
     Sku.search(this.props.product.id, this.state.pendingLineItemSize).then(data => {
       console.log(data[0].id);
       let uniqueId = new Date()
-      localStore.set('cart', [...this.props.cart, {item_id: uniqueId, sku_id: data[0].id, total: this.props.product.price, count: 1}])
-      this.props.updateCart( [...this.props.cart, {item_id: uniqueId, sku_id: data[0].id, total: this.props.product.price, count: 1}])
+      localStore.set('cart', [...this.props.cart, {item_id: uniqueId, sku_id: data[0].id, total: this.props.product.price }])
+      this.props.updateCart( [...this.props.cart, {item_id: uniqueId, sku_id: data[0].id, total: this.props.product.price }])
       return data && data[0].id
     }).then((id) => {
       console.log(this.props.cart)
@@ -84,13 +84,13 @@ class ProductShowDetails extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    cart: state.cart,
+    cart: state.cart
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateCart: (pendingLineItems) => dispatch(uiActions.updateCart(pendingLineItems)),
+    updateCart: (pendingLineItems) => dispatch(uiActions.updateCart(pendingLineItems))
   }
 }
 

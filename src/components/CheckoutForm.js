@@ -28,4 +28,6 @@ class CheckoutForm extends React.Component {
   }
 }
 
+
+
 export default injectStripe(CheckoutForm);

@@ -9,6 +9,7 @@ const initialState = {
   currentBand: getBand(),
   productSkus: [],
   cart: getCart(),
+  total: 0,
 }
 
 export default function formStore(state = initialState, action) {
@@ -40,11 +41,15 @@ export default function formStore(state = initialState, action) {
         productSkus: action.payload
       }
     case 'UPDATE_CART':
-    console.log('reducer', action.payload)
       return {
         ...state,
         cart: action.payload
       }
+    case 'UPDATE_TOTAL':
+    return {
+      ...state,
+      total: action.payload
+    }
     default:
       return state;
   }
