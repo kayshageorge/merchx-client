@@ -1,6 +1,6 @@
 const DOMAIN = 'localhost:3000';
 const BASE_URL = `http://${DOMAIN}`;
-const JWT = 'eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiYmFuZF9uYW1lIjoiQmVsbGUgYW5kIFNlYmFzdGlhbiIsImV4cCI6MTUyMjUyNTY2OX0.erM3UzRUDo2XHYc9gICgfJpC-wni5yltzb_EKFRDOb0';
+const JWT = 'eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiYmFuZF9uYW1lIjoiQmVsbGUgYW5kIFNlYmFzdGlhbiIsImV4cCI6MTUyMjYzMjI5OX0.geYimnviUS5bZjpWWpszBYlQxsBpw7wbM7h9eb7x7ek';
 
 const Token = {
   create (params) {
@@ -122,4 +122,20 @@ const Sku = {
   }
 };
 
-export { Product, Band, Sku, Token };
+const Charge = {
+  create(token, total) {
+    return fetch(
+      `${BASE_URL}/charges`,
+      {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ token, total })
+      }
+    )
+    .then(res => res.json());
+  }
+};
+
+export { Product, Band, Sku, Token, Charge };

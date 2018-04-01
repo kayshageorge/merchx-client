@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Row, Col } from 'antd';
+import { Link } from 'react-router-dom';
 
 class CartFooter extends React.Component {
   render() {
@@ -10,7 +11,9 @@ class CartFooter extends React.Component {
             <p>Total: ${this.props.total}</p>
           </Col>
           <Col span={6}>
-            <Button style={{marginTop: "10px", marginBottom: "15px"}} size="large">Checkout</Button>
+            <Link to='/checkout'>
+              <Button style={{marginTop: "10px", marginBottom: "15px"}} size="large">Checkout</Button>
+            </Link>
           </Col>
         </Row>
         <Row style={{display: 'flex', justifyContent: 'center', marginTop: '15px'}}>

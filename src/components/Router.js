@@ -26,7 +26,7 @@ const Router = () => (
         <HeaderRoute path="/band/:id"  component={ ProductIndex }/>
         <HeaderRoute path="/products/:id" component={ ProductShowPage } />
         <Route exact path="/cart" component={ CartPage } />
-        <Route exact path='/checkout' component={ Checkout.js } />
+        <Route exact path='/checkout' component={ Checkout } />
       </Switch>
     </div>
   </BrowserRouter>

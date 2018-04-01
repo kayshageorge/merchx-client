@@ -1,6 +1,5 @@
 import React from 'react';
 import { injectStripe } from 'react-stripe-elements';
-import AddressSection from './AddressSection';
 import CardSection from './CardSection';
 import CartHeader from './CartHeader';
 import { Charge } from '../lib/requests';
@@ -11,7 +10,7 @@ class CheckoutForm extends React.Component {
     // debugger
     this.props.stripe.createToken().then(({token}) => {
       console.log('Received Stripe token:', token);
-      Charge.create(token, );
+      Charge.create(token, 1000);
 
 
     });
