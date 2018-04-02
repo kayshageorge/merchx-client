@@ -2,6 +2,7 @@ import localStore from '../lib/localStore';
 
 const getBand = () => localStore.get('currentBand') || {};
 const getCart = () => localStore.get('cart') || [];
+const getTotal = () => localStore.get('total') || 0;
 
 const initialState = {
   allProducts: [],
@@ -9,6 +10,7 @@ const initialState = {
   currentBand: getBand(),
   productSkus: [],
   cart: getCart(),
+  total: getTotal(),
 }
 
 export default function formStore(state = initialState, action) {
@@ -40,11 +42,16 @@ export default function formStore(state = initialState, action) {
         productSkus: action.payload
       }
     case 'UPDATE_CART':
-    console.log('reducer', action.payload)
       return {
         ...state,
         cart: action.payload
       }
+    case 'UPDATE_TOTAL':
+    console.log('%$&*(#(%*%*%))', action.payload)
+    return {
+      ...state,
+      total: action.payload
+    }
     default:
       return state;
   }

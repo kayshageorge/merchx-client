@@ -7,6 +7,7 @@ import ProductShowPage from './ProductShowPage';
 import WrappedSignIn from './BandSignIn';
 import WrappedSignUp from './BandSignUp';
 import CartPage from './CartPage';
+import Checkout from './Checkout';
 
 const HeaderRoute = (props) => {
   return [
@@ -25,6 +26,7 @@ const Router = () => (
         <HeaderRoute path="/band/:id"  component={ ProductIndex }/>
         <HeaderRoute path="/products/:id" component={ ProductShowPage } />
         <Route exact path="/cart" component={ CartPage } />
+        <Route exact path='/checkout' component={ Checkout } />
       </Switch>
     </div>
   </BrowserRouter>

@@ -16,6 +16,9 @@ const actions = {
   },
   updateCart: (pendingLineItems) => {
     return { type: 'UPDATE_CART', payload: pendingLineItems }
+  },
+  updateTotal: (amount) => {
+    return { type: 'UPDATE_TOTAL', payload: amount }
   }
 }
 

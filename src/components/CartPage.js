@@ -7,14 +7,6 @@ import uiActions from '../actions/uiActions';
 
 class CartPage extends React.Component {
 
-  componentWillUpdate(nextProps, nextState) {
-      console.log('should update')
-  }
-
-  componentWillUpdate() {
-    console.log('CART PAGE UPDATED', this.props.cart);
-  }
-
   render() {
     let cart = this.props.cart;
     let total = 0
@@ -23,13 +15,13 @@ class CartPage extends React.Component {
       <div>
         <CartHeader />
           { cart.map((item, key) => {
-            console.log(item.total)
-            total += parseInt(item.total, 10)
+            // console.log(item.total)
+            // total += parseInt(item.total, 10)
             // NOTE there may be behavior changes if it turns our that the key is not unique.
             return <CartItem item={item} key={item.item_id} index={key} />
           }
           ) }
-        <CartFooter total={total} />
+        <CartFooter amount={this.props.total} />
       </div>
     )
   }
@@ -38,7 +30,8 @@ class CartPage extends React.Component {
 const mapStateToProps = (state) => {
   console.log(state)
   return {
-    cart: state.cart
+    cart: state.cart,
+    total: state.total
   }
 }
 
