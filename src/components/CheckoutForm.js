@@ -3,6 +3,8 @@ import { injectStripe } from 'react-stripe-elements';
 import CardSection from './CardSection';
 import CartHeader from './CartHeader';
 import { Charge } from '../lib/requests';
+import { connect } from 'react-redux';
+import uiActions from '../actions/uiActions';
 
 class CheckoutForm extends React.Component {
   handleSubmit = (e) => {
@@ -10,7 +12,7 @@ class CheckoutForm extends React.Component {
     // debugger
     this.props.stripe.createToken().then(({token}) => {
       console.log('Received Stripe token:', token);
-      Charge.create(token, 1000);
+      Charge.create(token, this.props.total);
 
 
     });
@@ -28,6 +30,21 @@ class CheckoutForm extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    cart: state.cart,
+    total: state.total,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateCart: (lineItems) => dispatch(uiActions.updateCart(lineItems)),
+    updateTotal: (amount) => dispatch(uiActions.updateTotal(amount))
+  }
+}
 
 
-export default injectStripe(CheckoutForm);
+
+// export default injectStripe(CheckoutForm);
+export default injectStripe(connect(mapStateToProps, mapDispatchToProps)(CheckoutForm));

@@ -35,6 +35,8 @@ class CartItem extends React.Component {
     console.log('cart after removed', cart)
     localStore.set('cart', cart)
     this.props.updateCart(cart)
+    localStore.set('total', parseInt(this.props.total, 10) - parseInt(this.state.product.price, 10))
+    this.props.updateTotal(parseInt(this.props.total, 10) - parseInt(this.state.product.price, 10))
   }
 
   render() {
@@ -79,13 +81,15 @@ class CartItem extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    cart: state.cart
+    cart: state.cart,
+    total: state.total,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateCart: (lineItems) => dispatch(uiActions.updateCart(lineItems))
+    updateCart: (lineItems) => dispatch(uiActions.updateCart(lineItems)),
+    updateTotal: (amount) => dispatch(uiActions.updateTotal(amount))
   }
 }
 

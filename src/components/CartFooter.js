@@ -1,14 +1,16 @@
 import React from 'react';
 import { Button, Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 class CartFooter extends React.Component {
+
   render() {
     return(
       <div>
         <Row style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center'}}>
           <Col span={15}>
-            <p>Total: ${this.props.total}</p>
+            <p>Total: ${this.props.amount}</p>
           </Col>
           <Col span={6}>
             <Link to='/checkout'>
@@ -27,4 +29,11 @@ class CartFooter extends React.Component {
   }
 }
 
-export default CartFooter;
+const mapStateToProps = (state) => {
+  console.log(state)
+  return {
+    total: state.total
+  }
+}
+
+export default connect(mapStateToProps)(CartFooter);

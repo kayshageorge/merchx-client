@@ -29,11 +29,16 @@ class ProductShowDetails extends React.Component {
     Sku.search(this.props.product.id, this.state.pendingLineItemSize).then(data => {
       console.log(data[0].id);
       let uniqueId = new Date()
+      // let amount = this.props.total
+      // console.log('amount', amount)
       localStore.set('cart', [...this.props.cart, {item_id: uniqueId, sku_id: data[0].id, total: this.props.product.price }])
       this.props.updateCart( [...this.props.cart, {item_id: uniqueId, sku_id: data[0].id, total: this.props.product.price }])
+      localStore.set('total', parseInt(this.props.total, 10) + parseInt(this.props.product.price, 10))
+      this.props.updateTotal(parseInt(this.props.total, 10) + parseInt(this.props.product.price, 10))
       return data && data[0].id
     }).then((id) => {
-      console.log(this.props.cart)
+      console.log('cart', this.props.cart)
+      console.log('total', this.props.total)
     })
   }
 
@@ -84,13 +89,15 @@ class ProductShowDetails extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    cart: state.cart
+    cart: state.cart,
+    total: state.total
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateCart: (pendingLineItems) => dispatch(uiActions.updateCart(pendingLineItems))
+    updateCart: (pendingLineItems) => dispatch(uiActions.updateCart(pendingLineItems)),
+    updateTotal: (amount) => dispatch(uiActions.updateTotal(amount))
   }
 }
 
