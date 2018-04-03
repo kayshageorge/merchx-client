@@ -46,7 +46,7 @@ class ProductShowDetails extends React.Component {
   renderSizes = (productSkus, labelType) => {
     const sizeButtons = productSkus.map(sku => {
       if (sku[labelType]) {
-        return <Radio.Button value={sku.size} disabled={sku.qty <= 0}>{sku[labelType]}</Radio.Button>
+        return <Radio.Button value={sku.size} key={sku.id} disabled={sku.qty <= 0}>{sku[labelType]}</Radio.Button>
       }
     })
     return sizeButtons;

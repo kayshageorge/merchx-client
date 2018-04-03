@@ -1,33 +1,48 @@
 import React from 'react';
-import { Button } from 'antd';
 import { injectStripe } from 'react-stripe-elements';
+import { Button } from 'antd';
 import CardSection from './CardSection';
 import CartHeader from './CartHeader';
 import { Charge } from '../lib/requests';
 import { connect } from 'react-redux';
 import uiActions from '../actions/uiActions';
+import localStore from '../lib/localStore';
 
 class CheckoutForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.stripe.createToken().then(({token}) => {
       console.log('Received Stripe token:', token);
-      Charge.create(token, this.props.total);
+      Charge.create(token, this.props.total).then((data) => {
+        console.log(data.status)
+        if (data.status == 'succeeded'){
+          localStore.set('cart', [])
+          this.props.updateCart( [])
+          localStorage.setItem('total', 0)
+          this.props.updateTotal(0)
+          console.log('SUCCESS!')
+        }
+        else {
+          console.log('NOOOOOOOO');
+        }
+      })
     });
 
   }
-  // Send all form inputs as params to charge request, then disect it into the pieces you need (ei: total, customer email and marketing prefs)
-  // after charge request, if complete, erase localstore and state store, and show pickup page w QR code and further instructions. If errors present, show errors on page
 
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
-          <CartHeader />
-          <CardSection />
-          <Button type="primary" style={{margin: 'auto'}}>Complete order</Button>
-        </form>
-        <img src='https://www.aida.rentals/credit_cards.png' style={{height: '40px', marginTop: '15px'}}/>
+        <CartHeader />
+        <div style={{marginLeft: '10px', marginRight: '10px'}}>
+          <form onSubmit={this.handleSubmit}>
+            <CardSection />
+            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+            <Button type="primary" htmlType="submit" style={{height: '40px'}}>Confirm order</Button>
+            <img src='https://www.aida.rentals/credit_cards.png' style={{height: '40px'}}/>
+          </div>
+          </form>
+        </div>
       </div>
     );
   }
@@ -47,7 +62,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-
-
-// export default injectStripe(CheckoutForm);
 export default injectStripe(connect(mapStateToProps, mapDispatchToProps)(CheckoutForm));
