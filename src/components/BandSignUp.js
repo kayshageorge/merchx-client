@@ -60,50 +60,52 @@ class BandSignUp extends React.Component {
     const { errors } = this.state
     const { getFieldDecorator } = this.props.form;
     return(
-      <Row type="flex" align="middle" style={{height: '100vh'}}>
-        <Col span={18} offset={3} style={{margin: 'auto'}}>
-          <Form onSubmit={this.handleSubmit} className="login-form">
-            <FormItem>
-              {getFieldDecorator('band_name', {
-                rules: [{ required: true, message: 'Please input your band name!' }],
+      <div className="getsBackground">
+        <Row type="flex" align="middle" style={{height: '100vh'}}>
+          <Col span={18} offset={3} style={{margin: 'auto'}}>
+            <Form onSubmit={this.handleSubmit} className="login-form">
+              <FormItem>
+                {getFieldDecorator('band_name', {
+                  rules: [{ required: true, message: 'Please input your band name!' }],
+                })(
+                  <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} type="string" placeholder="Band Name" />
+                )}
+              </FormItem>
+
+              <FormItem>
+                {getFieldDecorator('email', {
+                  rules: [{ required: true, message: 'Please input your email!' }],
+                })(
+                  <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} type="email" placeholder="Email" />
+                )}
+              </FormItem>
+
+              <FormItem>
+                {getFieldDecorator('password', {
+                rules: [{ required: true, message: 'Please input your Password!' }],
               })(
-                <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} type="string" placeholder="Band Name" />
+                <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
               )}
-            </FormItem>
+              </FormItem>
 
-            <FormItem>
-              {getFieldDecorator('email', {
-                rules: [{ required: true, message: 'Please input your email!' }],
+              <FormItem>
+                {getFieldDecorator('password_confirmation', {
+                rules: [{ required: true, message: 'Please input your Password!' }],
               })(
-                <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} type="email" placeholder="Email" />
+                <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password Confirmation" />
               )}
-            </FormItem>
+              </FormItem>
 
-            <FormItem>
-              {getFieldDecorator('password', {
-              rules: [{ required: true, message: 'Please input your Password!' }],
-            })(
-              <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
-            )}
-            </FormItem>
-
-            <FormItem>
-              {getFieldDecorator('password_confirmation', {
-              rules: [{ required: true, message: 'Please input your Password!' }],
-            })(
-              <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password Confirmation" />
-            )}
-            </FormItem>
-
-            <FormItem>
-              <Button type="primary" htmlType="submit" className="login-form-button">
-                Log in
-              </Button>
-              Or <Link to='/band/sign_in'>sign in!</Link>
-            </FormItem>
-          </Form>
-        </Col>
-      </Row>
+              <FormItem>
+                <Button type="primary" htmlType="submit" className="login-form-button">
+                  Log in
+                </Button>
+                Or <Link to='/band/sign_in'>sign in!</Link>
+              </FormItem>
+            </Form>
+          </Col>
+        </Row>
+      </div>
     )
   }
 }

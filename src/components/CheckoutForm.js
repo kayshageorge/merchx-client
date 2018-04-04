@@ -18,7 +18,7 @@ class CheckoutForm extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="getsBackground" style={{height: '100vh'}}>
         <CartHeader />
         <div style={{marginLeft: '10px', marginRight: '10px'}}>
           <form onSubmit={this.handleSubmit}>

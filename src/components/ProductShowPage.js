@@ -20,7 +20,7 @@ class ProductShowPage extends React.Component {
     const product = this.props.currentProduct;
     const productSkus = this.props.productSkus;
     return(
-      <div>
+      <div className="getsBackground" style={{height: '100vh'}}>
         <ImageGallery image={product.images}/>
         <ProductShowDetails product={product} productSkus={productSkus}/>
       </div>

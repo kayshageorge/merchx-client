@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import {
 	CardElement,
   CardNumberElement,
@@ -50,50 +51,67 @@ class CardSection extends React.Component {
   render() {
     return (
       <div>
-        <label>
-          Card number
-          <CardNumberElement
-            onBlur={handleBlur}
-            onChange={handleChange}
-            onFocus={handleFocus}
-            onReady={handleReady}
-            {...createOptions(this.props.fontSize)}
-          />
-        </label>
-        <label>
-          Expiration date
-          <CardExpiryElement
-            onBlur={handleBlur}
-            onChange={handleChange}
-            onFocus={handleFocus}
-            onReady={handleReady}
-            {...createOptions(this.props.fontSize)}
-          />
-        </label>
-        <label>
-          CVC
-          <CardCVCElement
-            onBlur={handleBlur}
-            onChange={handleChange}
-            onFocus={handleFocus}
-            onReady={handleReady}
-            {...createOptions(this.props.fontSize)}
-          />
-        </label>
-        <label>
-          Postal code
-          <PostalCodeElement
-            onBlur={handleBlur}
-            onChange={handleChange}
-            onFocus={handleFocus}
-            onReady={handleReady}
-            {...createOptions(this.props.fontSize)}
-          />
-        </label>
+				<div style={{marginTop: '10px', display: 'flex', justifyContent: 'center'}}>
+					<h2>Total due: ${this.props.total}</h2>
+				</div>
+				<div style={{marginTop: '15px'}}>
+	        <label>
+	          Card number
+	          <CardNumberElement
+	            onBlur={handleBlur}
+	            onChange={handleChange}
+	            onFocus={handleFocus}
+	            onReady={handleReady}
+	            {...createOptions(this.props.fontSize)}
+	          />
+	        </label>
+				</div>
+				<div style={{marginTop: '45px'}}>
+	        <label>
+	          Expiration date
+	          <CardExpiryElement
+	            onBlur={handleBlur}
+	            onChange={handleChange}
+	            onFocus={handleFocus}
+	            onReady={handleReady}
+	            {...createOptions(this.props.fontSize)}
+	          />
+	        </label>
+				</div>
+				<div style={{marginTop: '45px'}}>
+	        <label>
+	          CVC
+	          <CardCVCElement
+	            onBlur={handleBlur}
+	            onChange={handleChange}
+	            onFocus={handleFocus}
+	            onReady={handleReady}
+	            {...createOptions(this.props.fontSize)}
+	          />
+	        </label>
+				</div>
+				<div style={{marginTop: '45px'}}>
+	        <label>
+	          Postal code
+	          <PostalCodeElement
+	            onBlur={handleBlur}
+	            onChange={handleChange}
+	            onFocus={handleFocus}
+	            onReady={handleReady}
+	            {...createOptions(this.props.fontSize)}
+	          />
+	        </label>
+				</div>
       </div>
     );
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    total: state.total,
+  }
+}
 
-export default CardSection;
+
+export default connect(mapStateToProps)(CardSection);

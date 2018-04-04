@@ -7,13 +7,15 @@ class CartHeader extends React.Component {
   render() {
     const bandName = this.props.currentBand.band_name
     return (
-      <Row type="flex" justify="center" align="center" style={{marginTop: "15px"}}>
-        <Col span={18} style={{display: "flex", justifyContent: "center"}}>
-          <Link to={`/band/${this.props.currentBand.id}`}>
-            <h1>{bandName}</h1>
-          </Link>
-        </Col>
-      </Row>
+      <div className="getsBackground">
+        <Row type="flex" justify="center" align="center">
+          <Col span={18} style={{display: "flex", justifyContent: "center"}}>
+            <Link style={{marginTop: "15px"}} to={`/band/${this.props.currentBand.id}`}>
+              <h1>{bandName}</h1>
+            </Link>
+          </Col>
+        </Row>
+      </div>
     );
   }
 }

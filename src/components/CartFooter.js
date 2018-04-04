@@ -14,7 +14,7 @@ class CartFooter extends React.Component {
           </Col>
           <Col span={6}>
             <Link to='/checkout'>
-              <Button style={{marginTop: "10px", marginBottom: "15px"}} size="large">Checkout</Button>
+              <Button style={{marginTop: "10px", marginBottom: "15px"}} type='primary' size="large">Checkout</Button>
             </Link>
           </Col>
         </Row>
