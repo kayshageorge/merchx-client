@@ -11,22 +11,25 @@ import localStore from '../lib/localStore';
 class CheckoutForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.stripe.createToken().then(({token}) => {
-      console.log('Received Stripe token:', token);
-      Charge.create(token, this.props.total).then((data) => {
-        console.log(data.status)
-        if (data.status == 'succeeded'){
-          localStore.set('cart', [])
-          this.props.updateCart( [])
-          localStorage.setItem('total', 0)
-          this.props.updateTotal(0)
-          console.log('SUCCESS!')
-        }
-        else {
-          console.log('NOOOOOOOO');
-        }
-      })
-    });
+    this.props.stripe.createToken().then(({token}) =>
+      this.props.charge(token)
+      // console.log('Received Stripe token:', token);
+      // Charge.create(token, this.props.total).then((data) => {
+      //   console.log(data.status)
+      //   if (data.status == 'succeeded'){
+      //     localStore.set('cart', [])
+      //     this.props.updateCart( [])
+      //     localStorage.setItem('total', 0)
+      //     this.props.updateTotal(0)
+      //     console.log('SUCCESS!')
+      //     // <Redirect to="/complete" />
+      //   }
+      //   else {
+      //     console.log('NOOOOOOOO');
+      //   }
+      // })
+    // }
+  );
 
   }
 
@@ -62,4 +65,7 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
+
+
+// export default injectStripe(CheckoutForm);
 export default injectStripe(connect(mapStateToProps, mapDispatchToProps)(CheckoutForm));
