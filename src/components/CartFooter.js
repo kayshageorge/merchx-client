@@ -10,7 +10,7 @@ class CartFooter extends React.Component {
       <div>
         <Row style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center'}}>
           <Col span={15}>
-            <p>Total: ${this.props.amount}</p>
+            <h2>Total: ${this.props.amount}</h2>
           </Col>
           <Col span={6}>
             <Link to='/checkout'>
@@ -21,7 +21,7 @@ class CartFooter extends React.Component {
         <Row style={{display: 'flex', justifyContent: 'center', marginTop: '15px'}}>
           <Col span={22}>
             <h4>How this is gonna go down:</h4>
-            <p>Once your payment goes through, we'll send you an order confirmation email with a special QR code you can use to pick up your sweet new merch. Just bring that email to our merch table and you'll be set! Make sure to stop by before venue curfew, or your order will be cancelled and refunded.</p>
+            <p>Once your payment goes through, we'll send you an order confirmation QR code you can use to pick up your sweet new merch. Just bring your phone with the confirmation page to our merch table and you'll be set! Make sure to stop by before venue curfew, or your order will be cancelled and refunded.</p>
           </Col>
         </Row>
       </div>

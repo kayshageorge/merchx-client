@@ -1,5 +1,6 @@
 import React from 'react';
 import CartHeader from './CartHeader';
+import AppFooter from './AppFooter';
 
 class PaymentComplete extends React.Component {
   render(){
@@ -11,6 +12,7 @@ class PaymentComplete extends React.Component {
           <h2>Payment Complete!</h2>
           <h4>Take this code to our merch table to pick up your stuff!</h4>
         </div>
+        <AppFooter />
       </div>
     )
   }
