@@ -1,6 +1,6 @@
 const DOMAIN = 'localhost:3000';
 const BASE_URL = `http://${DOMAIN}`;
-const JWT = 'eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiYmFuZF9uYW1lIjoiQmVsbGUgYW5kIFNlYmFzdGlhbiIsImV4cCI6MTUyMjk2NTg4MX0.WoEHW7YvckeYNqsFUPHmcIFsOUmoWF8itGMS0njzcW8';
+const JWT = 'eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiYmFuZF9uYW1lIjoiQmVsbGUgYW5kIFNlYmFzdGlhbiIsImV4cCI6MTUyMzA1NzEzMH0.fswpDPs4fGsHBZQCX4EZmoXkytiXkL3ppNhOHR-cQZA';
 
 const Token = {
   create (params) {
