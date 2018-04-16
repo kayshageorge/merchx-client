@@ -29,8 +29,6 @@ class ProductShowDetails extends React.Component {
     Sku.search(this.props.product.id, this.state.pendingLineItemSize).then(data => {
       console.log(data[0].id);
       let uniqueId = new Date()
-      // let amount = this.props.total
-      // console.log('amount', amount)
       localStore.set('cart', [...this.props.cart, {item_id: uniqueId, sku_id: data[0].id, total: this.props.product.price }])
       this.props.updateCart( [...this.props.cart, {item_id: uniqueId, sku_id: data[0].id, total: this.props.product.price }])
       localStore.set('total', parseInt(this.props.total, 10) + parseInt(this.props.product.price, 10))
@@ -46,7 +44,7 @@ class ProductShowDetails extends React.Component {
   renderSizes = (productSkus, labelType) => {
     const sizeButtons = productSkus.map(sku => {
       if (sku[labelType]) {
-        return <Radio.Button value={sku.size} disabled={sku.qty <= 0}>{sku[labelType]}</Radio.Button>
+        return <Radio.Button value={sku.size} key={sku.id} disabled={sku.qty <= 0}>{sku[labelType]}</Radio.Button>
       }
     })
     return sizeButtons;

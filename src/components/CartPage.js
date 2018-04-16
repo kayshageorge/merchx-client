@@ -15,9 +15,6 @@ class CartPage extends React.Component {
       <div>
         <CartHeader />
           { cart.map((item, key) => {
-            // console.log(item.total)
-            // total += parseInt(item.total, 10)
-            // NOTE there may be behavior changes if it turns our that the key is not unique.
             return <CartItem item={item} key={item.item_id} index={key} />
           }
           ) }

@@ -8,6 +8,7 @@ import WrappedSignIn from './BandSignIn';
 import WrappedSignUp from './BandSignUp';
 import CartPage from './CartPage';
 import Checkout from './Checkout';
+import PaymentComplete from './PaymentComplete';
 
 const HeaderRoute = (props) => {
   return [
@@ -27,6 +28,7 @@ const Router = () => (
         <HeaderRoute path="/products/:id" component={ ProductShowPage } />
         <Route exact path="/cart" component={ CartPage } />
         <Route exact path='/checkout' component={ Checkout } />
+        <Route exact path='/complete' component={ PaymentComplete } />
       </Switch>
     </div>
   </BrowserRouter>
