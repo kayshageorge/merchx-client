@@ -49,32 +49,34 @@ class BandSignIn extends React.Component {
     const { errors } = this.state
     const { getFieldDecorator } = this.props.form;
     return(
-      <Row type="flex" align="middle" style={{height: '100vh'}}>
-        <Col span={18} offset={3} style={{margin: 'auto'}}>
-          <Form onSubmit={this.handleSubmit} className="login-form">
-            <FormItem>
-              {getFieldDecorator('email', {
-                rules: [{ required: true, message: 'Please input your email!' }],
+      <div className="getsBackground">
+        <Row type="flex" align="middle" style={{height: '100vh'}}>
+          <Col span={18} offset={3} style={{margin: 'auto'}}>
+            <Form onSubmit={this.handleSubmit} className="login-form">
+              <FormItem>
+                {getFieldDecorator('email', {
+                  rules: [{ required: true, message: 'Please input your email!' }],
+                })(
+                  <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} type="email" placeholder="Email" />
+                )}
+              </FormItem>
+              <FormItem>
+                {getFieldDecorator('password', {
+                rules: [{ required: true, message: 'Please input your Password!' }],
               })(
-                <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} type="email" placeholder="Email" />
+                <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
               )}
-            </FormItem>
-            <FormItem>
-              {getFieldDecorator('password', {
-              rules: [{ required: true, message: 'Please input your Password!' }],
-            })(
-              <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
-            )}
-            </FormItem>
-            <FormItem>
-              <Button type="primary" htmlType="submit" className="login-form-button">
-                Log in
-              </Button>
-              Or <Link to='/band/sign_up'>register now!</Link>
-            </FormItem>
-          </Form>
-        </Col>
-      </Row>
+              </FormItem>
+              <FormItem>
+                <Button type="primary" htmlType="submit" className="login-form-button">
+                  Log in
+                </Button>
+                Or <Link to='/band/sign_up'>register now!</Link>
+              </FormItem>
+            </Form>
+          </Col>
+        </Row>
+      </div>
     )
   }
 }

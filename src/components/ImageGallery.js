@@ -9,7 +9,7 @@ class ImageGallery extends React.Component {
           <Col span={18}>
             <Card
                hoverable
-               cover={<img alt="example" src={this.props.image} />}
+               cover={<img alt="example" src={this.props.image} style={{borderRadius: '5px'}} />}
                style={{ margin: "10px" }}
                bodyStyle={{padding: "0"}}
              >

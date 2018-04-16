@@ -3,6 +3,7 @@ import ProductCard from './ProductCard';
 import { Product, Band } from '../lib/requests';
 import { connect } from 'react-redux';
 import uiActions from '../actions/uiActions';
+import AppFooter from './AppFooter';
 
 
 class ProductIndex extends React.Component {
@@ -17,9 +18,9 @@ class ProductIndex extends React.Component {
     const products = this.props.allProducts;
 
     return(
-      <div>
+      <div className="getsBackground">
         { products.map((product, key) =>
-          <ProductCard product={product} key={key} />
+        <ProductCard product={product} key={key} />
         ) }
       </div>
     )

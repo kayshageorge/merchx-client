@@ -1,20 +1,80 @@
 @import '~antd/dist/antd.css';
 
-/* .StripeElement {
-  width: 70%;
-  float: right;
-  position: relative;
-  top: 50%;
-  transform: perspective(1px) translateY(-50%);
-} */
+body {
+  background-image: url("./images/concrete_seamless.png");
+  font-family: 'Roboto', sans-serif;
+}
+
+.ant-card-bordered {
+  border: none;
+  border-radius: 5px;
+}
+
+.ant-badge-count {
+  background-color: #e8b500;
+}
+
+.ant-card-body {
+  background-color: rgba(0, 0, 0, 0)
+}
+
+.ant-btn:hover, .ant-btn:focus {
+  border-color: #C69B00;
+  color: #C69B00;
+}
+
+.ant-radio-button-wrapper-checked:hover {
+  border-color: #C69B00;
+  color: #C69B00;
+}
+
+.ant-radio-button-wrapper-checked::before {
+  border-color: #C69B00 !important;
+  color: #C69B00;
+}
+
+.ant-radio-button-wrapper-checked {
+  border-color: #C69B00 !important;
+  color: #C69B00;
+}
+
+.ant-radio-button-checked {
+  border-color: #C69B00 !important;
+  color: #C69B00;
+}
+
+a {
+  color: #e8b500;
+}
+
+.ant-btn-primary:active {
+  background-color: #e8b500;
+}
+
+.ant-btn-primary {
+  background-color: #e8b500;
+  border-color: #e8b500;
+}
+
+.ant-btn-clicked {
+  background-color: #e8b500;
+}
+
+.ant-btn-primary:hover, .ant-btn-primary:focus {
+  background-color: #C69B00;
+  border-color: #C69B00;
+}
+
+.ant-input::selection {
+  background: #e8b500;
+}
+
+.ant-input:hover {
+  border-color: #e8b500;
+}
 
 .App {
   text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
 }
 
 .App-header {

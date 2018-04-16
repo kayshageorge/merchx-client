@@ -48,7 +48,7 @@ class CartItem extends React.Component {
     console.log('index', index);
 
     return(
-      <div>
+      <div style={{backgroundColor: 'white', marginLeft: '10px', marginRight: '10px', marginBottom: '10px'}}>
         <Card style={{height: '140px', padding: '0'}} bodyStyle={{height: '100%', padding: '0'}}>
           <Row style={{display: 'flex', height: '100%'}}>
               <Col span={6} style={{display: 'flex', alignSelf: 'center', justifyContent: 'center'}}>

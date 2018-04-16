@@ -7,6 +7,7 @@ import { Charge } from '../lib/requests';
 import { connect } from 'react-redux';
 import uiActions from '../actions/uiActions';
 import localStore from '../lib/localStore';
+import AppFooter from './AppFooter';
 
 class CheckoutForm extends React.Component {
   handleSubmit = (e) => {
@@ -18,7 +19,7 @@ class CheckoutForm extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="getsBackground" style={{height: '100vh'}}>
         <CartHeader />
         <div style={{marginLeft: '10px', marginRight: '10px'}}>
           <form onSubmit={this.handleSubmit}>
@@ -29,6 +30,7 @@ class CheckoutForm extends React.Component {
           </div>
           </form>
         </div>
+        <AppFooter />
       </div>
     );
   }
